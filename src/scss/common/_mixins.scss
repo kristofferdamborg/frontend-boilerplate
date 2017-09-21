@@ -1,0 +1,198 @@
+/* Mixins
+=============================================================================
+Content:
+
+1. Responsive
+    1.1 Breakpoints
+
+3. Flexbox
+    3.1 Flexbox center
+
+4. Transforms
+    4.1 General transforms
+    
+5. Positioning
+    5.1 Center elements
+
+========================================================================== */
+
+
+
+/* ==========================================================================
+ 1.1 Breakpoints
+========================================================================== */
+
+// Define breakpoint sizes
+$breakpoint-xs: 480px; // Bootstrap default xs size
+$breakpoint-sm: 768px; // Bootstrap default sm size
+$breakpoint-md: 992px; // Bootstrap default md size
+$breakpoint-lg: 1200px; // Bootstrap default lg size
+
+@mixin breakpoint($size, $type: max, $pixels: $breakpoint-xs) {
+  @if $size == 'xs' {
+    @media screen and ($type + -width: $breakpoint-xs) {
+        @content;
+    }
+  }
+  @else if $size == 'sm' {
+    @media screen and ($type + -width: $breakpoint-sm) {
+        @content;
+    }
+  }
+  @else if $size == 'md' {
+    @media screen and ($type + -width: $breakpoint-md) {
+        @content;
+    }
+  }
+ @else if $size == 'lg' {
+    @media screen and ($type + -width: $breakpoint-lg) {
+        @content;
+    }
+  }
+  @else if $size == 'custom' {
+    @media screen and ($type + -width: $pixels + px) {
+     @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+
+/* Usage
+
+.foo {
+  @include breakpoint(xs) {
+    width: 20%;
+  }
+  @include breakpoint(sm) {
+    width: 40%;
+  }
+  @include breakpoint(md) {
+    width: 60%;
+  }
+  @include breakpoint(lg) {
+    width: 80%;
+  }
+  @include breakpoint(custom, max, 400) {
+    width: 100%;
+  }
+}
+
+*/
+
+/* ==========================================================================
+ 2.1 Flexbox center
+========================================================================== */
+
+// Centers content both vertical and horizontal
+@mixin flex-center() {
+    display: -ms-flexbox;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-center-x() {
+    display: -ms-flexbox;  
+    display: flex;
+    justify-content: center;
+}
+
+@mixin flex-center-y() {
+    display: -ms-flexbox;  
+    display: flex;
+    align-items: center;
+}
+
+/* ==========================================================================
+ 3.1 Transforms
+========================================================================== */
+
+// General transform
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
+// Rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+ 
+// Scale
+@mixin scale($scale) {
+	 @include transform(scale($scale));
+} 
+
+/* Usage definition
+
+Usage 1:
+@include transform(translateY(45deg));
+
+Output:
+.foo {
+    -moz-transform:translateY(45deg);
+    -o-transform: translateY(45deg);
+	-ms-transform: translateY(45deg);
+	-webkit-transform: translateY(45deg);
+    transform: translateY(45deg);
+}
+
+Usage 2 (same with rotate mixin):
+@include scale(2);
+
+Output:
+.foo {
+    -moz-transform: scale(2);
+    -o-transform: scale(2);
+	-ms-transform: scale(2);
+	-webkit-transform: scale(2);
+    transform: scale(2);
+}
+*/
+
+/* ==========================================================================
+ 4.1 Center elements
+========================================================================== */
+
+// Define vertical, horizontal, or both position
+@mixin center($position) {
+  position: absolute;
+  
+  @if $position == 'y' {
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%); 
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  @else if $position == 'x' {
+    left: 50%;
+    -moz-transform: translateX(-50%);
+    -o-transform: translateX(-50%); 
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  @else if $position == 'both' {
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%); 
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+/* Usage
+.foo {
+  @include center(both);
+}
+.foo-parent {
+  position: relative;
+}
+*/

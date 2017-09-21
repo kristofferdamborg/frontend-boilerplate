@@ -1,0 +1,30 @@
+*,
+*:before,
+*:after {
+  -moz-box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-size: $font-size-base; // Default font size (if change, edit the font-size mixin)
+  background-color: $bg-primary!important;
+}
+ 
+body {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    line-height: $line-height-base;
+    font-family: $font-primary;
+}
+
+html,
+body {
+    max-width: 100%;
+}

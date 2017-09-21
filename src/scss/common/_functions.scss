@@ -1,0 +1,37 @@
+/* Functions
+=============================================================================
+Content:
+
+1. Rem calculator
+
+========================================================================== */
+
+
+
+/* ==========================================================================
+ 1. Rem calculator
+========================================================================== */
+
+// Calculates pixel to rem
+// Define default font size
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return #{$remSize}rem;
+  }
+  
+  @mixin font-size($size) {
+    font-size: $size; // Fallback in px
+    font-size: calculateRem($size);
+  }
+  
+  /* Usage
+  p {
+    @include font-size(14px)
+  } 
+  
+  Output
+  p {
+    font-size: 14px; // Fallback for unsupported browsers
+    font-size: 0.8rem;
+  } 
+  */

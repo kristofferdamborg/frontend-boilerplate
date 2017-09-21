@@ -1,0 +1,22 @@
+
+/** Import NPM Dependencies */
+@import "~normalize.css";
+@import "~bulma";
+$fa-font-path: "~font-awesome/fonts/";
+@import "~font-awesome/scss/font-awesome";
+
+/** Import Styles */
+
+/** Common */
+@import "common/variables";
+@import "common/global";
+@import "common/mixins";
+@import "common/functions";
+
+/** Components */
+@import "components/forms";
+@import "components/navbar";
+@import "components/buttons";
+
+/** Layouts */
+@import "layouts/header";
